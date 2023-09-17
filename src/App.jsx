@@ -1,27 +1,20 @@
 
 import './App.css'
-import Footer from './layouts/Footer'
-import Navbar from './layouts/Navbar'
 import {
   createBrowserRouter,
-  Outlet,
   RouterProvider,
 } from "react-router-dom";
 import Home from './pages/Home';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchUser } from './stores/author/userAsyncSlice';
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
+import Layout from './layouts/Layout/Layout';
+import Profile from './pages/Profile/Profile';
 
-const Layout = () => {
-  return (
-    <div className='main'>
-      <Navbar />
-      <div className='content'>
-        <Outlet></Outlet>
-      </div>
-      <Footer />
-    </div>
-  )
-}
+
 const router = createBrowserRouter([
   {
     path: "",
@@ -30,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />
+      },
+      {
+        path: 'profile',
+        element: <Profile />
       }
     ]
   },
@@ -40,10 +37,21 @@ const router = createBrowserRouter([
   {
     path: 'register',
     element: <Register />
-  }
+  },
+  {
+    path: 'forgot-password',
+    element: <ForgotPassword />
+  },
+
 ]);
 
 function App() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    if (localStorage.getItem('accessToken')) {
+      dispatch(fetchUser())
+    }
+  }, [])
   return (
     <RouterProvider router={router} />
   )

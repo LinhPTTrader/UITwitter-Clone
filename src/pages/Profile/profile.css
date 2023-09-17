@@ -1,0 +1,96 @@
+.Profile {
+    position: relative;
+    z-index: 0;
+}
+
+.Profile-Background {
+    width: 100%;
+    height: 300px;
+    background-color: aquamarine;
+}
+
+.Profile-Avatar>img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: red;
+}
+
+.Profile-Avatar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.Profile-Avatar>button {
+    padding: 10px 10px;
+}
+
+.aa {
+    position: absolute;
+    width: 100%;
+    top: 260px;
+    z-index: 0
+}
+
+.Profile2 {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    padding-left: 20px;
+}
+
+.Profile2-button {
+    display: flex;
+    border-bottom: 1px solid gainsboro;
+    margin-top: 20px;
+}
+
+.Profile2-button>button {
+    width: 20%;
+    padding: 20px 20px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+
+}
+
+.Profile2-button>button:hover {
+    background-color: rgb(196, 234, 247);
+    border-bottom: 3px solid rgb(127, 218, 236);
+}
+
+.Profile-Avatar>button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: rgb(127, 218, 236);
+}
+
+.Profile-Avatar>button:hover {
+    background-color: gainsboro;
+
+}
+
+.Profile-list-info {
+    list-style: none;
+    display: flex;
+    gap: 30px
+}
+
+.Profile-list-info>li {
+    display: flex;
+    gap: 10px
+}
+
+.Profile-flower {
+    display: flex;
+    gap: 30px
+}

@@ -1,5 +1,8 @@
-import { Button, DatePicker, Form, Input } from 'antd'
+import { Button, DatePicker, Form, Input, message } from 'antd'
 import './register.css'
+import { UserRegister } from '../../services/user.services';
+import { useNavigate } from 'react-router-dom';
+
 
 const formItemLayout = {
     labelCol: {
@@ -33,10 +36,25 @@ const tailFormItemLayout = {
 };
 const Register = () => {
     const [form] = Form.useForm();
+    const navigate = useNavigate();
 
     const onFinish = (values) => {
         // console.log('Received values of form: ', values);
-        console.log('Received values of form: ', { ...values, date_of_birth: values.date_of_birth.$d.toString() });
+        // console.log('Received values of form: ', { ...values, date_of_birth: new Date(values.date_of_birth.$d) });
+        UserRegister(values)
+            .then(res => {
+                if (res.status === 200) {
+                    message.success(res.data.message);
+                    navigate('/login')
+
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                if (err.response.status === 422) [
+                    message.warning(err.response.data.message)
+                ]
+            })
     };
 
 
@@ -96,7 +114,7 @@ const Register = () => {
                 </Form.Item>
 
                 <Form.Item
-                    name="confirm"
+                    name="confirm_password"
                     label="Confirm Password"
                     dependencies={['password']}
                     hasFeedback

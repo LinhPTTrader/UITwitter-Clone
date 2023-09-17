@@ -1,0 +1,36 @@
+.drop-profile-main {
+    border: 1px solid gainsboro;
+    width: 300px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+
+.drop-profile-content {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    font-size: 18px;
+    padding: 3px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.drop-profile-content:hover {
+    background-color: rgb(230, 218, 218);
+}
+
+.drop-profile-icon {
+    padding: 10px;
+    border-radius: 50%;
+    background-color: rgb(192, 190, 192);
+}
+
+.drop-profile {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

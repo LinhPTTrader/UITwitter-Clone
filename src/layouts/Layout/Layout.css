@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.layout-menu {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    z-index: 0;
+}
+
+.layout-content {
+    width: 60%;
+    border-left: 1px solid gainsboro;
+}
+
+.layout-slider {
+    width: 20%;
+}
+
+.main-navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 1;
+}

@@ -1,12 +1,38 @@
 
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, message } from 'antd';
 import './login.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { UserLogin } from '../../services/user.services';
+import { useDispatch } from 'react-redux';
+import { doLoginAction } from '../../stores/author/userAsyncSlice';
+
+// import { useSelector } from 'react-redux'
 const Login = () => {
-    const onFinish = (values) => {
-        console.log('Received values of form: ', values);
+    const navigate = useNavigate();
+    const dispatch = useDispatch()
+    const onFinish = async (values) => {
+        UserLogin(values)
+            .then(res => {
+                // console.log(res)
+                if (res && res.status === 200) {
+                    console.log(res)
+                    localStorage.setItem('accessToken', res.data.accessToken)
+                    dispatch(doLoginAction(res.data.content))
+                    message.success(res.data.message)
+                    navigate('/')
+                }
+            })
+            .catch(err => {
+                if (err.response.status === 422) {
+                    message.warning(err.response.data.message)
+                } else {
+                    console.log(err.response)
+                }
+            })
+
     };
+    console.log('render')
     return (
         <div className='layout-login-form'>
             <Form
@@ -18,7 +44,7 @@ const Login = () => {
                 onFinish={onFinish}
             >
                 <Form.Item
-                    name="Email"
+                    name="email"
                     rules={[
                         {
                             required: true,
@@ -48,10 +74,7 @@ const Login = () => {
                     <Form.Item name="remember" valuePropName="checked" noStyle>
                         <Checkbox>Remember me</Checkbox>
                     </Form.Item>
-
-                    <a className="login-form-forgot" href="">
-                        Forgot password
-                    </a>
+                    <Link className="login-form-forgot" to="/forgot-password">Forgot password</Link>
                 </Form.Item>
 
                 <Form.Item>
