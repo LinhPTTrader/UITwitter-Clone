@@ -1,0 +1,84 @@
+.Post {}
+
+.Post-Header {
+    display: flex;
+    justify-content: center
+}
+
+.Post-Avatar {
+    display: flex;
+    gap: 10px;
+    margin: 10px 10px;
+}
+
+.Post-Icon {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+    padding: 15px 15px;
+}
+
+.Post-Icon>div {
+    cursor: pointer;
+}
+
+.Post-Menu {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    margin-bottom: 20px;
+    border: 1px solid gainsboro;
+    padding: 20px 20px;
+}
+
+.Post-ListIcon {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+}
+
+.Post-ListIcon>li {
+    cursor: pointer;
+}
+
+.Post-Button>button {
+    width: 100%;
+    padding: 10px 5px;
+    border-radius: 5px;
+    border: 1px solid ghostwhite;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.Post-Click-Modal-Avatar {
+    display: flex;
+    align-items: center;
+    gap: 15px
+}
+
+.Post-Click-Modal-ListIcon {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+}
+
+.Post-Click-Modal {
+    width: 600px;
+    border: 1px solid gainsboro;
+    padding: 20px 20px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.Post-Click {
+    display: flex;
+    justify-content: center;
+}
+
+.Post-Click-Modal-Icon {
+    display: flex;
+    gap: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}

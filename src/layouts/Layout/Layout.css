@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     height: 100vh;
+    margin-top: 110px;
 }
 
 .layout-menu {
@@ -13,17 +14,18 @@
 
 .layout-content {
     width: 60%;
-    border-left: 1px solid gainsboro;
+
 }
 
 .layout-slider {
     width: 20%;
+
 }
 
 .main-navbar {
-    position: sticky;
+    position: fixed;
     top: 0;
     width: 100%;
     background-color: white;
-    z-index: 1;
+    z-index: 2;
 }

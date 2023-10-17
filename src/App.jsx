@@ -13,6 +13,9 @@ import { fetchUser } from './stores/author/userAsyncSlice';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import Layout from './layouts/Layout/Layout';
 import Profile from './pages/Profile/Profile';
+import VerifyEmail from './pages/VerifyEmai/VerifyEmail';
+import Chat from './pages/Chat';
+import { fetchNewFeed } from './stores/author/newFeedAsyncsSlice';
 
 
 const router = createBrowserRouter([
@@ -42,6 +45,14 @@ const router = createBrowserRouter([
     path: 'forgot-password',
     element: <ForgotPassword />
   },
+  {
+    path: 'verify-email',
+    element: <VerifyEmail />
+  },
+  {
+    path: 'chat',
+    element: <Chat />
+  }
 
 ]);
 
@@ -50,6 +61,7 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem('accessToken')) {
       dispatch(fetchUser())
+      dispatch(fetchNewFeed())
     }
   }, [])
   return (

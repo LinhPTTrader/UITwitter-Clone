@@ -1,6 +1,8 @@
 import './profile.css'
 import { CalendarOutlined, GlobalOutlined, SnippetsOutlined } from '@ant-design/icons'
+import { useSelector } from 'react-redux'
 const Profile = () => {
+    const user = useSelector(state => state.asyncAuth.user);
     return (
         <>
             <div className='Profile'>
@@ -16,19 +18,21 @@ const Profile = () => {
             </div>
             <div className='Profile2'>
                 <div>
-                    <h2>LinhPhan</h2>
-                    <p>@LinhPhan</p>
+                    <h2>{user.name}</h2>
+                    <p>@{user.username}</p>
                 </div>
                 <div>
                     <span>
-                        Trader FX, Gaming, Nắm giữ $VET, $PYR, $MATIC, $WOO, $DYDX, $ETH, $BNB
+                        {user.bio}
                     </span>
                 </div>
                 <div>
                     <ul className='Profile-list-info'>
-                        <li><SnippetsOutlined /> <span>Dịch vụ tài chính</span></li>
-                        <li><GlobalOutlined /> <span>Việt Nam</span></li>
-                        <li><CalendarOutlined /> <span>Tham gia tháng 7 năm 2020</span></li>
+                        <li><SnippetsOutlined /> <span>{user.website}</span></li>
+                        <li><GlobalOutlined /> <span>{user.location}</span></li>
+                        <li><CalendarOutlined />
+                            <span>{(new Date(user.created_at)).getDate() + '-' + (new Date(user.created_at)).getMonth() + '-' + (new Date(user.created_at)).getFullYear()}
+                            </span></li>
                     </ul>
                 </div>
                 <div className='Profile-flower'><span><b>169</b> Đang theo dõi</span><span><b>153</b> Người theo dõi</span></div>

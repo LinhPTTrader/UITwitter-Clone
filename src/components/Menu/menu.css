@@ -2,6 +2,7 @@
     height: 100vh;
     padding-right: 20px;
     position: fixed;
+    border-right: 1px solid gainsboro;
 }
 
 .menu>ul {

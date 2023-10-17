@@ -21,9 +21,9 @@ const Layout = () => {
                     <Slider />
                 </div>
             </div>
-            <div className='main-footer'>
+            {/* <div className='main-footer'>
                 <Footer />
-            </div>
+            </div> */}
         </div>
     )
 }

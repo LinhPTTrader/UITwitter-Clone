@@ -4,10 +4,17 @@ import { FetchAccount } from "../../services/user.services";
 const initialState = {
     isAuthenticated: false,
     user: {
-        email: "",
-        name: "",
-        id: "",
-        date_of_birth: ""
+        _id: '',
+        name: '',
+        email: '',
+        date_of_birth: null,
+        verify: 0,
+        bio: '',
+        location: '',
+        website: '',
+        username: '',
+        avatar: '',
+        cover_photo: ''
     },
     loading: false
 };
@@ -26,7 +33,7 @@ const authAsyncSlice = createSlice({
     initialState,
     reducers: {
         doLoginAction: (state, action) => {
-            // console.log(action.payload);
+            console.log(action.payload);
             state.isAuthenticated = true;
             state.user = action.payload;
         },
@@ -49,7 +56,8 @@ const authAsyncSlice = createSlice({
                 state.loading = true;
                 console.log(action)
                 state.isAuthenticated = true;
-                state.user = action.payload
+                state.user = action.payload;
+                localStorage.setItem('profile', JSON.stringify(action.payload))
             })
             .addCase(fetchUser.rejected, (state) => {
                 state.loading = false;

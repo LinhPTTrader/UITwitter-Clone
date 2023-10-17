@@ -27,7 +27,7 @@ const Navbar = () => {
         <div className='navbar-main' ref={menuRef}>
             <div className="navbar">
                 <div className="nav-logo">
-                    <img src={logo} />
+                    <Link to="/"> <img src={logo} alt='' /></Link>
                     <input className='nav-input' placeholder='Tìm kiếm' />
                 </div>
                 <div className="nav-listIcon">
@@ -42,7 +42,7 @@ const Navbar = () => {
                 <div className="nav-profile">
                     <ul>
                         <li><AppstoreOutlined /></li>
-                        <li><MessageOutlined /></li>
+                        <li><Link to='/chat' style={{ color: 'inherit', }}><MessageOutlined /></Link></li>
                         <li><BellOutlined /></li>
                         {auth && <li onClick={() => setOpen(!open)}>
                             <UserOutlined />

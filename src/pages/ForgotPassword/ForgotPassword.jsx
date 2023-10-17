@@ -48,7 +48,7 @@ const ForgotPassword = () => {
                     <input value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)}></input>
                 </div>
                 <div className='ForgotPassword-button'>
-                    <button onClick={handleResetPassword}>Lấy lại mật khẩu</button>
+                    <button onClick={handleResetPassword}>Thiết lập lại mật khẩu</button>
                 </div>
             </div>}
         </>

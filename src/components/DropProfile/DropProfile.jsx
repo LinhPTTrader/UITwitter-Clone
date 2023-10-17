@@ -8,7 +8,6 @@ import {
 } from "@ant-design/icons"
 import './dropProfile.css'
 import { Logout } from "../../services/user.services";
-import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
 import { message } from "antd";
 import { ALERTTYPE } from "../../constants/alertType";
@@ -18,14 +17,10 @@ const DropProfile = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const HandleClickLogout = () => {
-        // console.log(localStorage.getItem('accessToken'))
-
-        const refreshToken = Cookies.get('refreshToken');
-        Logout(refreshToken)
+        // console.log(localStorage.getItem('accessToken')) 
+        Logout()
             .then(res => {
                 if (res) {
-                    localStorage.removeItem('accessToken');
-                    Cookies.remove('refreshToken');
                     dispatch(doLogout())
                     message.success(ALERTTYPE.LOGOUT_SUCCESS)
                     navigate('/login')

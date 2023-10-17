@@ -1,0 +1,79 @@
+.NewFeed-Header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.NewFeed {
+    width: 80%;
+    border: 1px solid rgb(245, 239, 239);
+    padding: 10px 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.NewFeed-Header-Left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.NewFeed-Header-Right {
+    display: flex;
+    gap: 10px;
+}
+
+.NewFeed-Header-Username {
+    cursor: pointer;
+    padding: 3px 3px;
+}
+
+.NewFeed-Content-LikeCom {
+    display: flex;
+    justify-content: space-around;
+}
+
+.NewFeed-Image {
+    display: flex;
+    justify-content: center;
+    padding: 10px 10px;
+}
+
+.NewFeed-Content {
+    display: flex;
+    justify-content: center;
+}
+
+.NewFeed-Content-Like {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    align-items: center;
+    padding: 5px 5px;
+    margin-bottom: 10px;
+    font-size: 24px;
+    text-align: center;
+
+}
+
+.NewFeed-Like {
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 50%;
+}
+
+.NewFeed-Like:hover {
+    background-color: aliceblue;
+}
+
+
+.NewFeed-Comment {
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 50%;
+}
+
+.NewFeed-Comment:hover {
+    background-color: aliceblue;
+}
