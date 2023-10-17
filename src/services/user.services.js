@@ -53,3 +53,8 @@ export const UnLikeTweet = async (tweet_id) => {
     console.log({ tweet_id })
     return await axios.post(`/likes/unlike`, { tweet_id })
 }
+
+export const CreatTweet = async (tweet) => {
+    console.log(tweet)
+    return await axios.post(`/tweets`, tweet)
+}

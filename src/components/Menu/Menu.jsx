@@ -1,6 +1,6 @@
 import { BellOutlined, CheckOutlined, EllipsisOutlined, FileTextOutlined, HomeOutlined, MessageOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons'
 import './menu.css'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 const Menu = () => {
     const navigate = useNavigate()
@@ -9,10 +9,13 @@ const Menu = () => {
     const HandleLinkProfile = () => {
         isAuthenticated ? navigate('/profile') : navigate('/login')
     }
+    const HandleRouterHome = () => {
+        navigate('/')
+    }
     return (
         <div className='menu'>
             <ul>
-                <li> <HomeOutlined />Trang chủ</li>
+                <li onClick={HandleRouterHome}> <HomeOutlined />Trang chủ</li>
                 <li> <SearchOutlined />Khám phá</li>
                 <li> <BellOutlined />Thông báo</li>
                 <li> <MessageOutlined />Tin nhắn</li>

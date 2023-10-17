@@ -1,7 +1,7 @@
 
 import './navbar.css';
 import logo from '../../assets/react.svg';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import { AppstoreOutlined, BellOutlined, HomeOutlined, LaptopOutlined, LoginOutlined, MessageOutlined, ShopOutlined, UserOutlined, YoutubeOutlined } from '@ant-design/icons';
 import DropProfile from '../../components/DropProfile/DropProfile';
@@ -11,6 +11,7 @@ const Navbar = () => {
     const auth = useSelector(state => state.asyncAuth.isAuthenticated)
     //Code này xử lí dropdown hiện thị khi click ra ngoài
     const menuRef = useRef(null)
+    const navigate = useNavigate()
     const [open, setOpen] = useState(false);
     useEffect(() => {
         function handleClickOutside(event) {
@@ -23,6 +24,9 @@ const Navbar = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [])
+    const HandleRouterHome = () => {
+        navigate('/')
+    }
     return (
         <div className='navbar-main' ref={menuRef}>
             <div className="navbar">
@@ -32,7 +36,7 @@ const Navbar = () => {
                 </div>
                 <div className="nav-listIcon">
                     <ul>
-                        <li><HomeOutlined /></li>
+                        <li onClick={HandleRouterHome}><HomeOutlined /></li>
                         <li><YoutubeOutlined /></li>
                         <li><ShopOutlined /></li>
                         <li><UserOutlined /></li>

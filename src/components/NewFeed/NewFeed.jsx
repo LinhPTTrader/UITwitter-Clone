@@ -65,7 +65,7 @@ const NewFeed = ({ newFeed }) => {
                     <Image
                         width={450}
                         height={400}
-                        src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                        src="https://twitter-clone-media.s3.ap-southeast-1.amazonaws.com/images/8c8e4360c0c443e6f28ded401.jpg"
                     />
                 </div>
                 <div className='NewFeed-Content-LikeCom'>
