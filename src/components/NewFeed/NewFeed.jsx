@@ -62,11 +62,17 @@ const NewFeed = ({ newFeed }) => {
                     <p>{newFeed.content}</p>
                 </div>
                 <div className='NewFeed-Image'>
-                    <Image
-                        width={450}
-                        height={400}
-                        src="https://twitter-clone-media.s3.ap-southeast-1.amazonaws.com/images/8c8e4360c0c443e6f28ded401.jpg"
-                    />
+                    {
+                        newFeed.medias.map((element, index) => (
+                            <div key={index}>
+                                <Image
+
+
+                                    src={element.url}
+                                />
+                            </div>
+                        ))
+                    }
                 </div>
                 <div className='NewFeed-Content-LikeCom'>
                     <div>

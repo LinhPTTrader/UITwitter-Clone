@@ -8,6 +8,7 @@ import PostContent from './PostContent';
 
 const Post = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+
     const showModal = () => {
         setIsModalOpen(true);
     };
@@ -22,11 +23,11 @@ const Post = () => {
             <div className='Post-Click'>
                 <div className='Post-Click-Modal'>
                     <div className='Post-Click-Modal-Avatar' onClick={showModal}>
-                        <div>
+                        <div className='Post-Click-Modal-Avatar-Size'>
                             <Avatar size={40} icon={<UserOutlined />} />
                         </div>
-                        <div>
-                            <Input style={{ width: 650 }} size='large' placeholder="Bạn đang nghĩ gì? " />
+                        <div className='Post-Click-Modal-Input-Size'>
+                            <Input size={400} placeholder="Bạn đang nghĩ gì? " />
                         </div>
                     </div>
                     <div className='Post-Click-Modal-ListIcon'>

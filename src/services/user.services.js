@@ -58,3 +58,16 @@ export const CreatTweet = async (tweet) => {
     console.log(tweet)
     return await axios.post(`/tweets`, tweet)
 }
+
+
+export const PostListImage = async (listImage) => {
+    console.log(listImage)
+    let bodyFormData = new FormData();
+    bodyFormData.append('image', listImage);
+    return await axios({
+        method: 'post',
+        url: '/medias/upload-image',
+        data: bodyFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+    });;
+}

@@ -35,6 +35,7 @@
 .NewFeed-Image {
     display: flex;
     justify-content: center;
+    flex-wrap: nowrap;
     padding: 10px 10px;
 }
 

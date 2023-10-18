@@ -4,6 +4,8 @@ import { Avatar, Select, message } from 'antd'
 import { DashOutlined, FileImageOutlined, GifOutlined, MacCommandOutlined, SendOutlined, SmileOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons'
 import TextArea from 'antd/es/input/TextArea'
 import { CreatTweet } from '../../services/user.services'
+import PostImage from './PostImage'
+import { useSelector } from 'react-redux'
 
 
 // Filter `option.label` match the user type `input`
@@ -13,10 +15,12 @@ const filterOption = (input, option) =>
 const PostContent = ({ handleOk }) => {
     const [value, setValue] = useState('');
     const [audience, setAudience] = useState(0)
-
+    const [medias, setMedias] = useState([])
+    const user = useSelector(state => state.asyncAuth.user)
     const onChange = (value) => {
         setAudience(value)
     };
+    const [showImage, SetShowImage] = useState(false)
 
     const onSearch = (value) => {
         console.log('search:', value);
@@ -31,7 +35,7 @@ const PostContent = ({ handleOk }) => {
             hashtags: [],
             mentions: [],
             parent_id: null,
-            medias: []
+            medias: medias
         }
         CreatTweet(tweet)
             .then(res => {
@@ -59,7 +63,7 @@ const PostContent = ({ handleOk }) => {
                         <Avatar size={64} icon={<UserOutlined />} />
                     </div>
                     <div>
-                        <h4>Linh Phan</h4>
+                        <h4>{user.name}</h4>
                         <Select
                             showSearch
                             placeholder="Đối tượng"
@@ -95,6 +99,12 @@ const PostContent = ({ handleOk }) => {
                         }}
                     />
                 </div>
+                {showImage &&
+                    <div className='Post-Image'>
+                        <PostImage medias={medias} setMedias={setMedias} />
+                    </div>
+                }
+
                 <div className='Post-Icon'>
                     <div>
                         <MacCommandOutlined />
@@ -109,7 +119,7 @@ const PostContent = ({ handleOk }) => {
                     </div>
                     <div>
                         <ul className='Post-ListIcon'>
-                            <li><FileImageOutlined /></li>
+                            <li onClick={() => { SetShowImage(!showImage) }}><FileImageOutlined /></li>
                             <li><UserAddOutlined /></li>
                             <li><SmileOutlined /></li>
                             <li><SendOutlined /></li>

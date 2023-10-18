@@ -33,7 +33,6 @@ const authAsyncSlice = createSlice({
     initialState,
     reducers: {
         doLoginAction: (state, action) => {
-            console.log(action.payload);
             state.isAuthenticated = true;
             state.user = action.payload;
         },
