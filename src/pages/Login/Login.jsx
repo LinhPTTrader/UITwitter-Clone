@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { UserLogin } from '../../services/user.services';
 import { useDispatch } from 'react-redux';
 import { doLoginAction } from '../../stores/author/userAsyncSlice';
+import Cookies from 'js-cookie';
 
 // import { useSelector } from 'react-redux'
 const Login = () => {
@@ -18,8 +19,10 @@ const Login = () => {
             .then(async (res) => {
                 // console.log(res)
                 if (res && res.status === 200) {
+                    console.log(res)
                     localStorage.setItem('accessToken', res.data.accessToken)
-                    console.log(localStorage.getItem('accessToken'))
+                    Cookies.set('refreshToken', res.data.refreshToken)
+                    // console.log(localStorage.getItem('accessToken'))
                     dispatch(doLoginAction(res.data.result))
                     navigate('/')
                     message.success(res.data.message)
