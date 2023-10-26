@@ -7,8 +7,7 @@ import moment from "moment";
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { GetUserById } from '../../services/user.services';
-import Follower from '../../components/Follower/Follower';
-import UnFollower from '../../components/UnFollower/UnFollower';
+import UserFollower from '../../components/UserFollower/UserFollower';
 
 
 
@@ -34,8 +33,7 @@ const ProfileUsers = () => {
                             <Avatar src={user.avatar} size={100} icon={<UserOutlined />} />
                         </div>
                         <div>
-                            <Follower user_id={user_id} />
-                            <UnFollower user_id={user_id} />
+                            <UserFollower user_id={user_id} />
                         </div>
 
                     </div>

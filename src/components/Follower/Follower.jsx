@@ -1,12 +1,13 @@
 import { Button, message } from 'antd'
 import React from 'react'
-import { UnFollowerUser } from '../../services/user.services'
+import { FollowerUser } from '../../services/user.services'
 
-const Follower = ({ user_id }) => {
+const Follower = ({ user_id, setCheckFollower }) => {
     const HandleFollowerUser = () => {
-        UnFollowerUser(user_id)
+        FollowerUser(user_id)
             .then(res => {
                 message.success(res.message)
+                setCheckFollower(true)
             })
             .catch(err => console.log(err))
     }

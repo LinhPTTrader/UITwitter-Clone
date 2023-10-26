@@ -22,6 +22,7 @@ const Home = () => {
                 .catch(err => console.log(err))
         }
     }, [isFetchNewFeed])
+    console.log('home')
     return (
         <div>
             <div>
@@ -30,7 +31,7 @@ const Home = () => {
             <div className="Home">
                 {
                     listNewFeed.map((element, index) => (
-                        <NewFeed newFeed={element} key={'newfeed' + index} />
+                        <NewFeed newFeed={element} key={'newfeed' + element._id} />
                     ))
                 }
 

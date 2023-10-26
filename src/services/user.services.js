@@ -151,3 +151,16 @@ export const UnFollowerUser = async (follower_user_id) => {
     const data = await res.json()
     return data
 }
+
+export const CheckFollower = async (follower_user_id) => {
+    const res = await fetch(`http://localhost:3000/users/checkFollower`, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`, // notice the Bearer before your token
+        },
+        body: JSON.stringify({ follower_user_id })
+    })
+    const data = await res.json()
+    return data
+}
