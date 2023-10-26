@@ -12,20 +12,40 @@ export const UserRegister = async (user) => {
 
 export const Logout = async () => {
     const refreshToken = Cookies.get('refreshToken');
-    console.log(localStorage.getItem('accessToken'))
-    const res = await axios.post('/users/logout', { refreshToken })
-    if (res) {
+    const res = await fetch(`http://localhost:3000/users/logout`, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`, // notice the Bearer before your token
+        },
+        body: JSON.stringify({ refreshToken })
+    })
+    const data = await res.json()
+    if (data) {
         localStorage.removeItem('accessToken');
         Cookies.remove('refreshToken');
         return true
     }
     return false
+
 }
 
 
 export const FetchAccount = async () => {
     const refreshToken = Cookies.get('refreshToken')
-    return await axios.post('/users/fetch', { refreshToken })
+    // return await axios.post('/users/fetch', { refreshToken })
+
+
+    const res = await fetch(`http://localhost:3000/users/fetch`, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`, // notice the Bearer before your token
+        },
+        body: JSON.stringify({ refreshToken })
+    })
+    const data = await res.json()
+    return data
 }
 export const ForgotPasswordUser = async (email) => {
     return await axios.post('/users/forgot-password', { email })
@@ -38,25 +58,32 @@ export const VerifyEmail = async (token) => {
     return await axios.get('/user/verify-email')
 }
 
-
-export const GetNewFeed = async (limit, page) => {
-    return await axios.get(`/tweets/newfeed?limit=${limit}&page=${page}`)
-}
-
 export const LikeTweet = async (tweet_id) => {
-    console.log(tweet_id)
-    return await axios.post(`/likes`, { tweet_id })
+    const res = await fetch(`http://localhost:3000/likes`, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`, // notice the Bearer before your token
+        },
+        body: JSON.stringify({ tweet_id })
+    })
+    const data = await res.json()
+    return data
 }
 
 
 export const UnLikeTweet = async (tweet_id) => {
-    console.log({ tweet_id })
-    return await axios.post(`/likes/unlike`, { tweet_id })
-}
 
-export const CreatTweet = async (tweet) => {
-    console.log(tweet)
-    return await axios.post(`/tweets`, tweet)
+    const res = await fetch(`http://localhost:3000/likes/unlike`, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`, // notice the Bearer before your token
+        },
+        body: JSON.stringify({ tweet_id })
+    })
+    const data = await res.json()
+    return data
 }
 
 
@@ -70,4 +97,57 @@ export const PostListImage = async (listImage) => {
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
     });;
+}
+
+
+
+export const EditUser = async (user) => {
+    const res = await fetch(`http://localhost:3000/users/update-profile`, {
+        method: 'PATCH',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`, // notice the Bearer before your token
+        },
+        body: JSON.stringify(user)
+    })
+    const data = await res.json()
+    return data
+}
+
+
+export const GetUserById = async (user_id) => {
+    const res = await fetch(`http://localhost:3000/users/getuser/${user_id}`, {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`, // notice the Bearer before your token
+        },
+    })
+    const data = await res.json()
+    return data
+}
+
+export const FollowerUser = async (follower_user_id) => {
+    const res = await fetch(`http://localhost:3000/users/follower`, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`, // notice the Bearer before your token
+        },
+        body: JSON.stringify({ follower_user_id })
+    })
+    const data = await res.json()
+    return data
+}
+export const UnFollowerUser = async (follower_user_id) => {
+    const res = await fetch(`http://localhost:3000/users/unfollower`, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`, // notice the Bearer before your token
+        },
+        body: JSON.stringify({ follower_user_id })
+    })
+    const data = await res.json()
+    return data
 }

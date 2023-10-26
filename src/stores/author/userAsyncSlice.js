@@ -16,15 +16,22 @@ const initialState = {
         avatar: '',
         cover_photo: ''
     },
-    loading: false
+    loading: false,
 };
 export const fetchUser = createAsyncThunk(
     //action type string
     'get/fetchUser',
     //callback function
     async () => {
-        const result = await FetchAccount();
-        return result.data
+        const res = await FetchAccount();
+        console.log(res)
+        if (res && res.status === 200) {
+            return res.result
+        } else {
+            localStorage.removeItem('accessToken')
+            return null
+        }
+
     }
 )
 
@@ -53,10 +60,15 @@ const authAsyncSlice = createSlice({
             })
             .addCase(fetchUser.fulfilled, (state, action) => {
                 state.loading = true;
-                console.log(action)
-                state.isAuthenticated = true;
-                state.user = action.payload;
-                localStorage.setItem('profile', JSON.stringify(action.payload))
+                if (action.payload === null) {
+                    state.isAuthenticated = false;
+                } else {
+                    state.isAuthenticated = true;
+                    state.user = action.payload;
+                    localStorage.setItem('profile', JSON.stringify(action.payload))
+                }
+
+
             })
             .addCase(fetchUser.rejected, (state) => {
                 state.loading = false;

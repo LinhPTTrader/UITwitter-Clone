@@ -5,9 +5,12 @@ import { FileImageOutlined, SmileOutlined, UserOutlined, VideoCameraOutlined } f
 import './Post.css'
 import Modal from 'antd/es/modal/Modal';
 import PostContent from './PostContent';
+import { useSelector } from 'react-redux';
 
 const Post = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const user = useSelector(state => state.asyncAuth.user)
 
     const showModal = () => {
         setIsModalOpen(true);
@@ -24,7 +27,7 @@ const Post = () => {
                 <div className='Post-Click-Modal'>
                     <div className='Post-Click-Modal-Avatar' onClick={showModal}>
                         <div className='Post-Click-Modal-Avatar-Size'>
-                            <Avatar size={40} icon={<UserOutlined />} />
+                            <Avatar src={user.avatar} size={54} icon={<UserOutlined />} />
                         </div>
                         <div className='Post-Click-Modal-Input-Size'>
                             <Input size={400} placeholder="Bạn đang nghĩ gì? " />

@@ -15,6 +15,7 @@ import Layout from './layouts/Layout/Layout';
 import Profile from './pages/Profile/Profile';
 import VerifyEmail from './pages/VerifyEmai/VerifyEmail';
 import Chat from './pages/Chat';
+import ProfileUsers from './pages/ProfileUsers/ProfileUsers';
 
 
 const router = createBrowserRouter([
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: <Profile />
+      },
+      {
+        path: 'profile/:user_id',
+        element: <ProfileUsers />
       }
     ]
   },
@@ -60,7 +65,6 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem('accessToken')) {
       dispatch(fetchUser())
-
     }
   }, [])
   return (

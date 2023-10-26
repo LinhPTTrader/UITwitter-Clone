@@ -10,17 +10,21 @@ import { doLoginAction } from '../../stores/author/userAsyncSlice';
 // import { useSelector } from 'react-redux'
 const Login = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
+
     const onFinish = async (values) => {
         UserLogin(values)
-            .then(res => {
+            .then(async (res) => {
                 // console.log(res)
                 if (res && res.status === 200) {
-                    console.log(res)
                     localStorage.setItem('accessToken', res.data.accessToken)
-                    dispatch(doLoginAction(res.data.content))
-                    message.success(res.data.message)
+                    console.log(localStorage.getItem('accessToken'))
+                    dispatch(doLoginAction(res.data.result))
                     navigate('/')
+                    message.success(res.data.message)
+
+
                 }
             })
             .catch(err => {

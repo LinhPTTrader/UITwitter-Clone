@@ -8,7 +8,7 @@ import {
 } from "@ant-design/icons"
 import './dropProfile.css'
 import { Logout } from "../../services/user.services";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { message } from "antd";
 import { ALERTTYPE } from "../../constants/alertType";
 import { useDispatch } from "react-redux";
@@ -38,7 +38,9 @@ const DropProfile = () => {
                         <UserOutlined />
                     </div>
                     <div>
-                        <span>Trang cá nhân</span>
+                        <Link to='/profile' style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                            <span>Trang cá nhân</span>
+                        </Link>
                     </div>
                 </div>
                 <div className="drop-profile-content">

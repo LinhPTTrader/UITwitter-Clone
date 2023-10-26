@@ -1,50 +1,47 @@
-import './profile.css'
+import React, { useEffect } from 'react'
 import { CalendarOutlined, GlobalOutlined, SnippetsOutlined, UserOutlined } from '@ant-design/icons'
-import { Avatar, Button, Modal } from 'antd';
-import { useSelector } from 'react-redux'
+import { Avatar } from 'antd';
+
 import moment from "moment";
-import UserTweet from '../../components/UserTweet/UserTweet';
+
 import { useState } from 'react';
-import EditProfile from '../../components/EditProfile/EditProfile';
-import AvatarUser from '../../components/AvatarUser/AvatarUser';
-import CoverPhoto from '../../components/CoverPhotoUser/CoverPhotoUser';
+import { useParams } from 'react-router-dom';
+import { GetUserById } from '../../services/user.services';
+import Follower from '../../components/Follower/Follower';
+import UnFollower from '../../components/UnFollower/UnFollower';
 
 
-const Profile = () => {
-    const user = useSelector(state => state.asyncAuth.user);
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
+const ProfileUsers = () => {
+    const [user, SetUSer] = useState([])
 
+    const { user_id } = useParams();
+    useEffect(() => {
+        GetUserById(user_id)
+            .then(res => {
+                if (res && res.data) {
+                    SetUSer(res.data)
+                }
+            })
+            .catch(err => console.log(err))
+    }, [])
     return (
         <>
             <div className='Profile'>
                 <div className='aa'>
                     <div className='Profile-Avatar'>
-                        <div className='Profile-Avatar-User'>
-                            <AvatarUser imageUser={user.avatar} />
+                        <div>
+                            <Avatar src={user.avatar} size={100} icon={<UserOutlined />} />
                         </div>
                         <div>
-                            <Button type="primary" onClick={showModal}>
-                                Chỉnh sửa hồ sơ
-                            </Button>
-                            <Modal title="Chỉnh sửa thông tin" open={isModalOpen} footer={null} onOk={handleOk} onCancel={handleCancel}>
-                                <EditProfile onOk={handleOk} />
-                            </Modal>
+                            <Follower user_id={user_id} />
+                            <UnFollower user_id={user_id} />
                         </div>
 
                     </div>
                 </div>
-                <div className='Profile-Avatar-User'>
-                    <CoverPhoto imageUser={user.cover_photo} />
+                <div>
+                    <img className='Profile-Background' src={user.cover_photo} alt="" />
                 </div>
             </div>
             <div className='Profile2'>
@@ -76,11 +73,11 @@ const Profile = () => {
                 <button>Phương tiện</button>
                 <button>Lượt thích</button>
             </div>
-            <div>
+            {/* <div>
                 <UserTweet />
-            </div>
+            </div> */}
         </>
     )
 }
 
-export default Profile
+export default ProfileUsers

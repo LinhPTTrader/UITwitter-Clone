@@ -3,9 +3,11 @@ import './Post.css'
 import { Avatar, Select, message } from 'antd'
 import { DashOutlined, FileImageOutlined, GifOutlined, MacCommandOutlined, SendOutlined, SmileOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons'
 import TextArea from 'antd/es/input/TextArea'
-import { CreatTweet } from '../../services/user.services'
+
 import PostImage from './PostImage'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { CreatTweet } from '../../services/tweets.services'
+import { fetchNewFeed } from '../../stores/author/fetchSlice'
 
 
 // Filter `option.label` match the user type `input`
@@ -21,6 +23,8 @@ const PostContent = ({ handleOk }) => {
         setAudience(value)
     };
     const [showImage, SetShowImage] = useState(false)
+
+    const dispatch = useDispatch()
 
     const onSearch = (value) => {
         console.log('search:', value);
@@ -39,13 +43,12 @@ const PostContent = ({ handleOk }) => {
         }
         CreatTweet(tweet)
             .then(res => {
-                if (res.status === 200) {
-                    message.success(res.data.message);
-                    setValue('')
-                    handleOk();
-                } else {
-                    message.warning('ERR')
-                }
+                console.log(res)
+                message.success(res.message);
+                dispatch(fetchNewFeed())
+                setValue('')
+                handleOk();
+                setMedias([])
             })
             .catch(err => {
                 message.error('Error')
@@ -60,10 +63,10 @@ const PostContent = ({ handleOk }) => {
                 </div>
                 <div className='Post-Avatar'>
                     <div>
-                        <Avatar size={64} icon={<UserOutlined />} />
+                        <Avatar src={user.avatar} size={64} icon={<UserOutlined />} />
                     </div>
                     <div>
-                        <h4>{user.name}</h4>
+                        <h4>{user?.name}</h4>
                         <Select
                             showSearch
                             placeholder="Đối tượng"

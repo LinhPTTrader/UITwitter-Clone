@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Modal, Upload } from 'antd';
+import { Modal, Typography, Upload, message } from 'antd';
+import { v4 as uuidv4 } from 'uuid'; // Lấy UI duy nhất
 import { PostListImage } from '../../services/user.services';
 
 const getBase64 = (file) =>
@@ -10,18 +11,20 @@ const getBase64 = (file) =>
         reader.onload = () => resolve(reader.result);
         reader.onerror = (error) => reject(error);
     });
-
-const PostImage = ({ medias, setMedias }) => {
-    const URL = `http://localhost:3000/medias/upload-image`;
+const EditAvatar = ({ avatar, SetAvatar }) => {
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
-    useEffect(() => {
-        console.log(medias)
-    }, [])
+    const [fileList, setFileList] = useState([{
+        uid: uuidv4(),
+        name: avatar,
+        status: 'done',
+        url: avatar,
+    }]);
 
-    const handleCancelImage = () => setPreviewOpen(false);
-
+    const handleCancel = () => {
+        setPreviewOpen(false)
+    };
     const handlePreview = async (file) => {
         if (!file.url && !file.preview) {
             file.preview = await getBase64(file.originFileObj);
@@ -29,40 +32,32 @@ const PostImage = ({ medias, setMedias }) => {
         setPreviewImage(file.url || file.preview);
         setPreviewOpen(true);
         setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
-    }
-
-    // Khi có sự thây đổi hình ảnh
-    const handleChange = (
-        { fileList: newFileList, file: fileChange }) => {
-        console.log(newFileList)
-        if (medias.length > newFileList.length) {
-            let arr = medias.filter(item => item.uid != fileChange.uid);
-            console.log('remove Image')
-            setMedias(arr)
-        }
     };
+    const handleChange = ({ fileList: newFileList }) => {
+        const newArr = newFileList.map(item => {
+            return {
+                ...item, status: 'done'
 
+            }
+        })
+        setFileList([newArr[newArr.length - 1]])
+    };
 
     // Post file img lên Server
     const postListFile = ({ file, onSuccess, onError }) => {
-        console.log(file)
+        // console.log(file)
         PostListImage(file)
             .then(res => {
-                console.log(res)
                 if (res && res.data) {
-                    setMedias(listImage => [...listImage, {
-                        name: file.name,
-                        uid: file.uid,
-                        status: 'done',
-                        url: res.data.result[0].url
-                    }])
+                    console.log(res.data)
+
+                    SetAvatar(res.data.result[0].url)
+                    //onSuccess('Upload thành công')
+                    // message.success(res.data.message)
                 }
             })
-            .catch(err => onError('Upload thất bại'))
+        //.catch(err => onError('Upload thất bại'))
     }
-
-
-
     const uploadButton = (
         <div>
             <PlusOutlined />
@@ -75,25 +70,22 @@ const PostImage = ({ medias, setMedias }) => {
             </div>
         </div>
     );
-
-
     return (
         <div>
-
-
             <Upload
                 // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                 listType="picture-card"
-                fileList={medias}
+                fileList={fileList}
                 onPreview={handlePreview}
                 onChange={handleChange}
                 customRequest={postListFile}
-                multiple={true}
-
+                showUploadList={
+                    { showRemoveIcon: false }
+                } // Xóa Icon Remove
             >
-                {medias.length >= 8 ? null : uploadButton}
+                {fileList.length >= 8 ? null : uploadButton}
             </Upload>
-            <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancelImage}>
+            <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
                 <img
                     alt="example"
                     style={{
@@ -101,10 +93,8 @@ const PostImage = ({ medias, setMedias }) => {
                     }}
                     src={previewImage}
                 />
-            </Modal>
-
-        </div>
+            </Modal></div>
     )
 }
 
-export default PostImage
+export default EditAvatar
