@@ -12,7 +12,7 @@ export const UserRegister = async (user) => {
 
 export const Logout = async () => {
     const refreshToken = Cookies.get('refreshToken');
-    const res = await fetch(`http://localhost:3000/users/logout`, {
+    const res = await fetch(`https://lptrader.vn/users/logout`, {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -36,7 +36,7 @@ export const FetchAccount = async () => {
     // return await axios.post('/users/fetch', { refreshToken })
 
 
-    const res = await fetch(`http://localhost:3000/users/fetch`, {
+    const res = await fetch(`https://lptrader.vn/users/fetch`, {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -59,7 +59,7 @@ export const VerifyEmail = async (token) => {
 }
 
 export const LikeTweet = async (tweet_id) => {
-    const res = await fetch(`http://localhost:3000/likes`, {
+    const res = await fetch(`https://lptrader.vn/likes`, {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -74,7 +74,7 @@ export const LikeTweet = async (tweet_id) => {
 
 export const UnLikeTweet = async (tweet_id) => {
 
-    const res = await fetch(`http://localhost:3000/likes/unlike`, {
+    const res = await fetch(`https://lptrader.vn/likes/unlike`, {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -102,7 +102,7 @@ export const PostListImage = async (listImage) => {
 
 
 export const EditUser = async (user) => {
-    const res = await fetch(`http://localhost:3000/users/update-profile`, {
+    const res = await fetch(`https://lptrader.vn/users/update-profile`, {
         method: 'PATCH',
         headers: {
             'Content-type': 'application/json',
@@ -116,7 +116,7 @@ export const EditUser = async (user) => {
 
 
 export const GetUserById = async (user_id) => {
-    const res = await fetch(`http://localhost:3000/users/getuser/${user_id}`, {
+    const res = await fetch(`https://lptrader.vn/users/getuser/${user_id}`, {
         method: 'GET',
         headers: {
             'Content-type': 'application/json',
@@ -128,7 +128,7 @@ export const GetUserById = async (user_id) => {
 }
 
 export const FollowerUser = async (follower_user_id) => {
-    const res = await fetch(`http://localhost:3000/users/follower`, {
+    const res = await fetch(`https://lptrader.vn/users/follower`, {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -140,7 +140,7 @@ export const FollowerUser = async (follower_user_id) => {
     return data
 }
 export const UnFollowerUser = async (follower_user_id) => {
-    const res = await fetch(`http://localhost:3000/users/unfollower`, {
+    const res = await fetch(`https://lptrader.vn/users/unfollower`, {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -153,7 +153,7 @@ export const UnFollowerUser = async (follower_user_id) => {
 }
 
 export const CheckFollower = async (follower_user_id) => {
-    const res = await fetch(`http://localhost:3000/users/checkFollower`, {
+    const res = await fetch(`https://lptrader.vn/users/checkFollower`, {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
